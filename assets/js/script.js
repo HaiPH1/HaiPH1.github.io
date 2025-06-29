@@ -73,8 +73,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }, { rootMargin: "0px 0px -10% 0px" });
 
-    function animateHeadline(headline) {
-        if (headline.dataset.animated) return;
+        function animateHeadline(headline) {
+        // Chỉ áp dụng cho các headline không phải là glitch
+        if (headline.dataset.animated || headline.parentElement.id === 'hero') return;
+        
         headline.dataset.animated = true;
         const text = headline.textContent;
         headline.innerHTML = '';
@@ -114,44 +116,41 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     // --- THEMES SECTION (UPDATED) ---
-    // ./assets/js/script.js
-
-function generateThemes() {
-    const themesData = [
-        { icon: 'fa-leaf', title: 'Tech4Life', img: './assets/images/topics/tech4life.jpg', details: 'Các giải pháp công nghệ nhằm giải quyết các thách thức về môi trường, thúc đẩy sử dụng tài nguyên hiệu quả, phát triển đô thị thông minh bền vững, và xây dựng một tương lai xanh hơn cho Việt Nam. Ví dụ: AI tối ưu hóa việc thu gom và xử lý rác thải đô thị; Hệ thống điều phối giao thông thông minh giảm ùn tắc và khí thải; Mạng lưới cảm biến IoT giám sát và cảnh báo sớm ô nhiễm môi trường; Nền tảng trực tuyến thúc đẩy kinh tế tuần hoàn qua tái chế và tái sử dụng Ứng dụng di động khuyến khích và theo dõi các lựa chọn di chuyển xanh,...' }, 
-        { icon: 'fa-suitcase-medical', title: 'Tech4Health', img: './assets/images/topics/tech4health.jpg', details: 'Các giải pháp công nghệ đột phá nhằm cải thiện chất lượng dịch vụ y tế, nâng cao khả năng chẩn đoán sớm, cá nhân hóa điều trị, quản lý sức khỏe chủ động và tăng cường khả năng tiếp cận y tế cho mọi người dân. Ví dụ: AI hỗ trợ phân tích hình ảnh y tế để phát hiện sớm bệnh lý; Giải pháp khám chữa bệnh từ xa toàn diện, tích hợp theo dõi sức khỏe IoT; Thiết bị thông minh tại nhà hỗ trợ tuân thủ lịch uống thuốc; Ứng dụng AI chatbot cung cấp hỗ trợ tâm lý cơ bản và kết nối chuyên gia; Hệ thống AI cảnh báo sớm dịch bệnh dựa trên phân tích dữ liệu đa nguồn,...'}, 
-        { icon: 'fa-school', title: 'Tech4Edu', img: './assets/images/topics/tech4edu.jpg', details: 'Các giải pháp công nghệ nhằm đổi mới phương pháp dạy và học, cá nhân hóa trải nghiệm giáo dục, phát triển kỹ năng, và xây dựng một hệ sinh thái học tập suốt đời. Ví dụ: Nền tảng học tập thích ứng dùng AI cá nhân hóa lộ trình và nội dung học; Nền tảng AI kết nối người học với mentor chuyên gia và theo dõi tiến độ; Ứng dụng/game giáo dục dạy lập trình cho trẻ em một cách trực quan, sáng tạo; Nền tảng AI định hướng nghề nghiệp dựa trên phân tích sở thích và năng lực; Giải pháp xây dựng cộng đồng học tập trực tuyến, chia sẻ tài nguyên,...' }, 
-        { icon: 'fa-user-check', title: 'Tech4CX', img: './assets/images/topics/tech4cx.jpg', details: 'Các giải pháp công nghệ nhằm tạo ra trải nghiệm khách hàng vượt trội, liền mạch trên đa kênh, đồng thời tối ưu hóa quy trình vận hành nội bộ, tăng năng suất và hiệu quả kinh doanh. Ví dụ: Trợ lý ảo AI đa kênh hỗ trợ khách hàng và cá nhân hóa trải nghiệm 24/7; Hệ thống AI phân tích dữ liệu để cá nhân hóa nội dung và ưu đãi; Giải pháp AR cho phép khách hàng thử sản phẩm ảo trước khi mua; Nền tảng phân tích dữ liệu tại cửa hàng (AI, IoT) để tối ưu vận hành bán lẻ; Nền tảng RPA tự động hóa các quy trình lặp đi lặp lại trong văn phòng,...'}, 
-        { icon: 'fa-handshake-angle', title: 'Tech4Inclusion', img: './assets/images/topics/tech4inclusion.jpg', details: 'Các giải pháp công nghệ sáng tạo nhằm hỗ trợ người khuyết tật, người cao tuổi, và các nhóm yếu thế khác vượt qua rào cản, cải thiện chất lượng cuộc sống, tăng cường khả năng tiếp cận giáo dục, y tế, việc làm và hòa nhập cộng đồng. Ví dụ: Nền tảng giáo dục trực tuyến với giao diện và nội dung thích ứng cho người yếu thế; Trợ lý ảo AI đồng hành, cung cấp hỗ trợ sức khỏe tinh thần cho người cô đơn/cao tuổi; Nền tảng phục hồi chức năng từ xa kết nối bệnh nhân với chuyên gia trị liệu; Hệ thống nhà thông minh điều khiển bằng giọng nói/cử chỉ, tích hợp cảnh báo an toàn; Công cụ AI hỗ trợ trẻ em yếu thế sáng tạo, thể hiện bản thân và học tập,...' }
-    ];
-    const container = document.getElementById('themes-container');
-    if (!container) return;
-    
-    // *** THAY ĐỔI DUY NHẤT: Đổi <p> thành <div> để việc cuộn nội dung tốt hơn ***
-    container.innerHTML = `<div class="themes-list"></div><div class="theme-content-display"><img src="" alt="Theme Illustration" id="theme-image"><div id="theme-details-text"></div></div>`;
+    function generateThemes() {
+        const themesData = [
+            { icon: 'fa-leaf', title: 'Tech4Life', img: './assets/images/topics/tech4life.jpg', details: 'Các giải pháp công nghệ nhằm giải quyết các thách thức về môi trường, thúc đẩy sử dụng tài nguyên hiệu quả, phát triển đô thị thông minh bền vững, và xây dựng một tương lai xanh hơn cho Việt Nam. Ví dụ: AI tối ưu hóa việc thu gom và xử lý rác thải đô thị; Hệ thống điều phối giao thông thông minh giảm ùn tắc và khí thải; Mạng lưới cảm biến IoT giám sát và cảnh báo sớm ô nhiễm môi trường; Nền tảng trực tuyến thúc đẩy kinh tế tuần hoàn qua tái chế và tái sử dụng Ứng dụng di động khuyến khích và theo dõi các lựa chọn di chuyển xanh,...' }, 
+            { icon: 'fa-suitcase-medical', title: 'Tech4Health', img: './assets/images/topics/tech4health.jpg', details: 'Các giải pháp công nghệ đột phá nhằm cải thiện chất lượng dịch vụ y tế, nâng cao khả năng chẩn đoán sớm, cá nhân hóa điều trị, quản lý sức khỏe chủ động và tăng cường khả năng tiếp cận y tế cho mọi người dân. Ví dụ: AI hỗ trợ phân tích hình ảnh y tế để phát hiện sớm bệnh lý; Giải pháp khám chữa bệnh từ xa toàn diện, tích hợp theo dõi sức khỏe IoT; Thiết bị thông minh tại nhà hỗ trợ tuân thủ lịch uống thuốc; Ứng dụng AI chatbot cung cấp hỗ trợ tâm lý cơ bản và kết nối chuyên gia; Hệ thống AI cảnh báo sớm dịch bệnh dựa trên phân tích dữ liệu đa nguồn,...'}, 
+            { icon: 'fa-school', title: 'Tech4Edu', img: './assets/images/topics/tech4edu.jpg', details: 'Các giải pháp công nghệ nhằm đổi mới phương pháp dạy và học, cá nhân hóa trải nghiệm giáo dục, phát triển kỹ năng, và xây dựng một hệ sinh thái học tập suốt đời. Ví dụ: Nền tảng học tập thích ứng dùng AI cá nhân hóa lộ trình và nội dung học; Nền tảng AI kết nối người học với mentor chuyên gia và theo dõi tiến độ; Ứng dụng/game giáo dục dạy lập trình cho trẻ em một cách trực quan, sáng tạo; Nền tảng AI định hướng nghề nghiệp dựa trên phân tích sở thích và năng lực; Giải pháp xây dựng cộng đồng học tập trực tuyến, chia sẻ tài nguyên,...' }, 
+            { icon: 'fa-user-check', title: 'Tech4CX', img: './assets/images/topics/tech4cx.jpg', details: 'Các giải pháp công nghệ nhằm tạo ra trải nghiệm khách hàng vượt trội, liền mạch trên đa kênh, đồng thời tối ưu hóa quy trình vận hành nội bộ, tăng năng suất và hiệu quả kinh doanh. Ví dụ: Trợ lý ảo AI đa kênh hỗ trợ khách hàng và cá nhân hóa trải nghiệm 24/7; Hệ thống AI phân tích dữ liệu để cá nhân hóa nội dung và ưu đãi; Giải pháp AR cho phép khách hàng thử sản phẩm ảo trước khi mua; Nền tảng phân tích dữ liệu tại cửa hàng (AI, IoT) để tối ưu vận hành bán lẻ; Nền tảng RPA tự động hóa các quy trình lặp đi lặp lại trong văn phòng,...'}, 
+            { icon: 'fa-handshake-angle', title: 'Tech4Inclusion', img: './assets/images/topics/tech4inclusion.jpg', details: 'Các giải pháp công nghệ sáng tạo nhằm hỗ trợ người khuyết tật, người cao tuổi, và các nhóm yếu thế khác vượt qua rào cản, cải thiện chất lượng cuộc sống, tăng cường khả năng tiếp cận giáo dục, y tế, việc làm và hòa nhập cộng đồng. Ví dụ: Nền tảng giáo dục trực tuyến với giao diện và nội dung thích ứng cho người yếu thế; Trợ lý ảo AI đồng hành, cung cấp hỗ trợ sức khỏe tinh thần cho người cô đơn/cao tuổi; Nền tảng phục hồi chức năng từ xa kết nối bệnh nhân với chuyên gia trị liệu; Hệ thống nhà thông minh điều khiển bằng giọng nói/cử chỉ, tích hợp cảnh báo an toàn; Công cụ AI hỗ trợ trẻ em yếu thế sáng tạo, thể hiện bản thân và học tập,...' }
+        ];
+        const container = document.getElementById('themes-container');
+        if (!container) return;
         
-    const list = container.querySelector('.themes-list');
-    themesData.forEach((theme, i) => list.insertAdjacentHTML('beforeend', `<button class="theme-button" data-index="${i}"><i class="fas ${theme.icon}"></i><h4>${theme.title}</h4></button>`));
+        container.innerHTML = `<div class="themes-list"></div><div class="theme-content-display"><img src="" alt="Theme Illustration" id="theme-image"><div id="theme-details-text"></div></div>`;
+            
+        const list = container.querySelector('.themes-list');
+        themesData.forEach((theme, i) => list.insertAdjacentHTML('beforeend', `<button class="theme-button" data-index="${i}"><i class="fas ${theme.icon}"></i><h4>${theme.title}</h4></button>`));
 
-    const display = container.querySelector('.theme-content-display'), 
-          imgEl = document.getElementById('theme-image'), 
-          textEl = document.getElementById('theme-details-text'), // Vẫn lấy được element bình thường
-          buttons = list.querySelectorAll('.theme-button');
+        const display = container.querySelector('.theme-content-display'), 
+              imgEl = document.getElementById('theme-image'), 
+              textEl = document.getElementById('theme-details-text'),
+              buttons = list.querySelectorAll('.theme-button');
 
-    function updateThemeDisplay(index) {
-        const theme = themesData[index];
-        display.classList.add('is-changing');
-        setTimeout(() => { 
-            imgEl.src = theme.img; 
-            textEl.textContent = theme.details; // Gán text vào div mới
-            display.classList.remove('is-changing'); 
-        }, 150);
-        buttons.forEach(btn => btn.classList.remove('active'));
-        buttons[index].classList.add('active');
+        function updateThemeDisplay(index) {
+            const theme = themesData[index];
+            display.classList.add('is-changing');
+            setTimeout(() => { 
+                imgEl.src = theme.img; 
+                textEl.textContent = theme.details;
+                display.classList.remove('is-changing'); 
+            }, 150);
+            buttons.forEach(btn => btn.classList.remove('active'));
+            buttons[index].classList.add('active');
+        }
+        list.addEventListener('click', e => { const btn = e.target.closest('.theme-button'); if (btn) updateThemeDisplay(btn.dataset.index); });
+        updateThemeDisplay(0);
     }
-    list.addEventListener('click', e => { const btn = e.target.closest('.theme-button'); if (btn) updateThemeDisplay(btn.dataset.index); });
-    updateThemeDisplay(0);
-}
     
     // --- TIMELINE (UPDATED) ---
     function generateTimeline() {
@@ -239,6 +238,7 @@ function generateThemes() {
     }
 
     // --- THREE.JS BACKGROUND ANIMATION ---
+        // --- THREE.JS BACKGROUND ANIMATION ---
     function initThreeJS() {
         const heroCanvas = document.getElementById('hero-canvas');
         if (!heroCanvas || isTouchDevice || typeof THREE === 'undefined') {
@@ -252,49 +252,96 @@ function generateThemes() {
         const style = getComputedStyle(document.documentElement);
         const color1 = new THREE.Color(style.getPropertyValue('--accent-start').trim());
         const color2 = new THREE.Color(style.getPropertyValue('--accent-end').trim());
+
         function init() {
             scene = new THREE.Scene();
-            camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 1000);
-            camera.position.z = 200;
-            const particleCount = 150;
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 1000);
+            camera.position.z = 5; // Bắt đầu gần hơn một chút
+
+            const particleCount = 2000; // Tăng số lượng hạt
             const positions = new Float32Array(particleCount * 3);
             const colors = new Float32Array(particleCount * 3);
+
             for (let i = 0; i < particleCount; i++) {
-                positions[i * 3] = (Math.random() - 0.5) * 800;
-                positions[i * 3 + 1] = (Math.random() - 0.5) * 800;
-                positions[i * 3 + 2] = (Math.random() - 0.5) * 800;
+                // Phân bổ hạt trong một không gian hình hộp chữ nhật sâu
+                positions[i * 3] = (Math.random() - 0.5) * 50;
+                positions[i * 3 + 1] = (Math.random() - 0.5) * 50;
+                positions[i * 3 + 2] = (Math.random() - 0.5) * 500; // Trải dài theo trục Z
+
                 const color = color1.clone().lerp(color2, Math.random());
-                colors[i*3] = color.r; colors[i*3+1] = color.g; colors[i*3+2] = color.b;
+                colors[i * 3] = color.r;
+                colors[i * 3 + 1] = color.g;
+                colors[i * 3 + 2] = color.b;
             }
+
             const particleGeometry = new THREE.BufferGeometry();
             particleGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
             particleGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-            const particleMaterial = new THREE.PointsMaterial({ size: 3, vertexColors: true, blending: THREE.AdditiveBlending, transparent: true, sizeAttenuation: true });
+            
+            // Hạt nhỏ hơn để tạo cảm giác data stream
+            const particleMaterial = new THREE.PointsMaterial({
+                size: 0.1,
+                vertexColors: true,
+                blending: THREE.AdditiveBlending,
+                transparent: true,
+                sizeAttenuation: true
+            });
+
             particles = new THREE.Points(particleGeometry, particleMaterial);
             scene.add(particles);
+
             renderer = new THREE.WebGLRenderer({ canvas: heroCanvas, antialias: true, alpha: true });
             renderer.setPixelRatio(window.devicePixelRatio);
             renderer.setSize(window.innerWidth, window.innerHeight);
-            document.addEventListener('mousemove', (e) => { mouseX = e.clientX - windowHalfX; mouseY = e.clientY - windowHalfY; });
-            window.addEventListener('resize', () => { camera.aspect = window.innerWidth / window.innerHeight; camera.updateProjectionMatrix(); renderer.setSize(window.innerWidth, window.innerHeight); });
+
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX - windowHalfX;
+                mouseY = e.clientY - windowHalfY;
+            });
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
         }
+
         function animate() {
-            requestAnimationFrame(animate); render();
+            requestAnimationFrame(animate);
+            render();
         }
+
         function render() {
-            const time = Date.now() * 0.00005;
-            camera.position.x += (mouseX - camera.position.x) * 0.05;
-            camera.position.y += (-mouseY - camera.position.y) * 0.05;
+            // Phản ứng mạnh hơn với chuột
+            camera.position.x += (mouseX / 5 - camera.position.x) * 0.08;
+            camera.position.y += (-mouseY / 5 - camera.position.y) * 0.08;
             camera.lookAt(scene.position);
-            particles.rotation.y = time * 0.2;
-            particles.rotation.x = time * 0.1;
+            
+            // CHUYỂN ĐỘNG MỚI: Các hạt lao về phía trước
+            particles.position.z += 0.4;
+            if (particles.position.z > 200) {
+                particles.position.z = -200; // Reset khi đi quá xa
+            }
+
             renderer.render(scene, camera);
         }
-        init(); animate();
+
+        init();
+        animate();
     }
 
     // --- INITIALIZE ALL DYNAMIC PARTS ---
+        // --- INITIALIZE ALL DYNAMIC PARTS ---
     function initPage() {
+        // ... các hàm cũ như generateCountdown(), generateThemes(), etc.
+        
+        // THÊM ĐOẠN NÀY VÀO
+        const heroHeadlines = document.querySelectorAll('#hero .animated-headline');
+        heroHeadlines.forEach(headline => {
+            if (headline) {
+                headline.setAttribute('data-text', headline.textContent);
+            }
+        });
+
         generateCountdown();
         generateThemes();
         generateTimeline();
