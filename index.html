@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TechXpo Challenge 2025 - Celestial Navy (Final Polished v2)</title>
+    <title>TechXpo Challenge 2025 - Celestial Navy (Final Polished v3)</title>
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <body>
-    
+
     <div id="cursor-dot"></div>
     <div id="cursor-outline"></div>
 
@@ -33,29 +33,34 @@
             </button>
         </div>
     </nav>
-    
+
     <!-- HERO SECTION -->
     <header id="hero">
         <canvas id="hero-canvas"></canvas>
-        <div class="hero-content">
-            <h1 class="animated-headline">TechXpo Challenge 2025</h1>
+        <div class="hero-content animate-on-scroll">
+            <h1 class="animated-headline">TechXpo Challenge</h1>
+            <h1 class="animated-headline">2025</h1>
             <h2 class="animate-hero" data-animate="fade-up">Sức Trẻ Sáng Tạo - Khai Mở Tương Lai</h2>
             <div id="countdown-timer" class="animate-hero" data-animate="fade-up"></div>
             <a href="#registration-form-link" class="cta-button animate-hero" data-animate="fade-up"><span>THAM GIA NGAY</span></a>
         </div>
-        <div class="scroll-down-indicator"><div class="mouse"></div></div>
+        <div class="scroll-down-indicator">
+            <div class="chevron"></div>
+            <div class="chevron"></div>
+            <div class="chevron"></div>
+        </div>
     </header>
 
     <main>
         <!-- OVERVIEW SECTION -->
         <section id="overview" class="content-section">
             <div class="container"><div class="content-card animate-on-scroll fade-in-up">
-                <h2 class="animated-headline">Câu Chuyện Của TechXpo</h2>
+                <h2 class="animated-headline">Câu Chuyện TechXpo</h2>
                 <p class="section-intro">TechXpo Challenge ra đời với mục tiêu trở thành sân chơi công nghệ chất lượng cao, nơi các tài năng trẻ được khuyến khích giải quyết những bài toán thực tiễn bằng giải pháp đột phá. Cuộc thi không chỉ trang bị tư duy giải pháp, kỹ năng xây dựng sản phẩm mẫu và làm việc nhóm, mà còn khơi gợi tinh thần tư duy phản biện, đổi mới sáng tạo trong cộng đồng. Với sự đồng hành của các chuyên gia hàng đầu, chúng tôi cam kết phát hiện, nuôi dưỡng và chắp cánh cho những tài năng công nghệ có khả năng tạo ra tác động thực tế.</p>
             </div></div>
         </section>
 
-        <!-- RULES SECTION (NEW) -->
+        <!-- RULES SECTION -->
         <section id="rules" class="content-section">
             <div class="container">
                 <div class="content-card animate-on-scroll fade-in-up">
@@ -65,21 +70,21 @@
                             <i class="fas fa-users"></i>
                             <div>
                                 <h4>Đối tượng tham gia</h4>
-                                <p>Sinh viên các trường Đại học - Cao đẳng miền Bắc; Học sinh THPT Vinschool khu vực miền Bắc (Hà Nội, Hưng Yên, Hải Phòng,...) và toàn thể cán bộ nhân viên trẻ dưới 30 tuổi đang làm việc tại tập đoàn Vingroup.</p>
+                                <p>Sinh viên các trường Đại học - Cao đẳng miền Bắc; Học sinh THPT Vinschool khu vực miền Bắc và toàn thể cán bộ nhân viên trẻ dưới 30 tuổi đang làm việc tại tập đoàn Vingroup.</p>
                             </div>
                         </li>
                         <li>
                             <i class="fas fa-layer-group"></i>
                             <div>
                                 <h4>Hình thức tham gia</h4>
-                                <p>Các nhóm đăng đăng ký theo đội từ 2-5 thành viên. Mỗi cá nhân chỉ tham gia 01 đội. (BTC sẽ hỗ trợ ghép đội cho các thí sinh đăng ký cá nhân có nguyện vọng.)</p>
+                                <p>Các nhóm đăng ký theo đội từ 2-5 thành viên. Mỗi cá nhân chỉ tham gia 01 đội. BTC sẽ hỗ trợ ghép đội cho các thí sinh đăng ký cá nhân.</p>
                             </div>
                         </li>
                         <li>
                             <i class="fas fa-file-alt"></i>
                             <div>
                                 <h4>Bài dự thi</h4>
-                                <p>Sản phẩm là giải pháp công nghệ (phần mềm, ứng dụng, AI, IoT...) giải quyết một trong các chủ đề của cuộc thi. Hồ sơ, tài liệu và phần trình bày sử dụng ngôn ngữ Tiếng Việt.</p>
+                                <p>Sản phẩm là giải pháp công nghệ (phần mềm, ứng dụng, AI, IoT...) giải quyết một trong các chủ đề của cuộc thi. Hồ sơ và phần trình bày sử dụng ngôn ngữ Tiếng Việt.</p>
                             </div>
                         </li>
                         <li>
@@ -98,43 +103,92 @@
         <section id="themes" class="content-section">
             <div class="container"><div class="content-card animate-on-scroll fade-in-up">
                 <h2 class="animated-headline">Chủ Đề Thử Thách</h2>
-                <div id="themes-container" class="themes-container"><!-- JS Populated --></div>
+                <div id="themes-container" class="themes-container"></div>
             </div></div>
         </section>
-        
+
         <!-- TIMELINE SECTION -->
         <section id="timeline" class="content-section">
             <div class="container">
                 <h2 class="animated-headline">Lộ Trình Chinh Phục</h2>
-                <div class="timeline-wrapper"><!-- JS Populated --></div>
+                <div class="timeline-wrapper"></div>
             </div>
         </section>
-        
-        <!-- PRIZES SECTION -->
+
+        <!-- PRIZES SECTION (RESTRUCTURED) -->
         <section id="prizes" class="content-section">
             <div class="container">
                  <h2 class="animated-headline">Cơ Cấu Giải Thưởng</h2>
                 <div class="prize-wrapper">
                     <div class="prize-podium">
-                        <div class="prize-card interactive-card animate-on-scroll" data-stagger="1"><div class="card-content"><img src="./assets/images/sliver.png" alt="Silver Trophy" class="animate-pop-in"><h4>Giải Nhì</h4><p class="prize-amount">45.000.000 VNĐ</p><p class="prize-type">Bao gồm: 20.000.000 VNĐ Tiền mặt</p><p class="prize-extra">& Gói quà tặng nghỉ dưỡng trị giá 25.000.000 VNĐ cho cả đội</p></div></div>
-                        <div class="prize-card primary interactive-card animate-on-scroll" data-stagger="0"><div class="card-content"><img src="./assets/images/champion.png" alt="Gold Trophy" class="animate-pop-in"><h4>Giải Nhất</h4><p class="prize-amount">100.000.000 VNĐ</p><p class="prize-type">Bao gồm: 50.000.000 VNĐ Tiền mặt</p><p class="prize-extra">& Gói quà tặng nghỉ dưỡng trị giá 50.000.000 VNĐ cho cả đội</p></div></div>
-                        <div class="prize-card interactive-card animate-on-scroll" data-stagger="2"><div class="card-content"><img src="./assets/images/bronze.png" alt="Bronze Trophy" class="animate-pop-in"><h4>Giải Ba</h4><p class="prize-amount">17.000.000 VNĐ</p><p class="prize-type">Bao gồm: 10.000.000 VNĐ Tiền mặt</p><p class="prize-extra">2.500.000 VNĐ Voucher Xanh SM & combo vui chơi trị giá 5.000.000 VNĐ VinWonders cho cả đội.</p></div></div>
+                        <!-- GIẢI NHÌ -->
+                        <div class="prize-card interactive-card animate-on-scroll" data-stagger="1">
+                            <div class="card-content">
+                                <img src="./assets/images/sliver.png" alt="Silver Trophy" class="animate-pop-in">
+                                <h4>Giải Nhì</h4>
+                                <p class="prize-amount">45.000.000 VNĐ</p>
+                                <p class="prize-type">Bao gồm: 20.000.000 VNĐ Tiền mặt</p>
+                                <div class="prize-details">
+                                    <p>+ Gói nghỉ dưỡng Vinpearl trị giá 20.000.000 VNĐ</p>
+                                    <p>+ Voucher Xanh SM: 5.000.000 VNĐ</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- GIẢI NHẤT (QUÁN QUÂN) -->
+                        <div class="prize-card primary interactive-card animate-on-scroll" data-stagger="0">
+                            <div class="card-content">
+                                <img src="./assets/images/champion.png" alt="Gold Trophy" class="animate-pop-in">
+                                <h4>Giải Nhất</h4>
+                                <p class="prize-amount">100.000.000 VNĐ</p>
+                                <p class="prize-type">Bao gồm: 50.000.000 VNĐ Tiền mặt</p>
+                                <div class="prize-details">
+                                    <p>+ Gói nghỉ dưỡng Vinpearl trị giá 40.000.000 VNĐ</p>
+                                    <p>+ Voucher Xanh SM: 10.000.000 VNĐ</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- GIẢI BA -->
+                        <div class="prize-card interactive-card animate-on-scroll" data-stagger="2">
+                            <div class="card-content">
+                                <img src="./assets/images/bronze.png" alt="Bronze Trophy" class="animate-pop-in">
+                                <h4>Giải Ba</h4>
+                                <p class="prize-amount">17.000.000 VNĐ</p>
+                                <p class="prize-type">Bao gồm: 10.000.000 VNĐ Tiền mặt</p>
+                                <div class="prize-details">
+                                    <p>+ Voucher Xanh SM: 2.500.000 VNĐ</p>
+                                    <p>+ Vé vui chơi VinWonders: 5.000.000 VNĐ</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                    <!-- CÁC GIẢI PHỤ -->
                     <div class="prize-grid-bottom">
-                        <div class="distinguished-award animate-on-scroll fade-in-up" data-stagger="3"><img src="./assets/images/voted.png" alt="Award Medal" class="medal-img"><div class="award-text"><h4>Giải Gian Hàng Yêu Thích Nhất</h4><p>Tiền mặt: <strong>5.000.000 VNĐ</strong> & voucher Xanh SM trị giá 1.000.000 VNĐ.</p></div></div>
-                        <div class="distinguished-award animate-on-scroll fade-in-up" data-stagger="4"><img src="./assets/images/voted.png" alt="Award Medal" class="medal-img"><div class="award-text"><h4>Cơ Hội Phát Triển</h4><p>Các dự án xuất sắc có cơ hội được VinIF và VinTechTalent xem xét đầu tư và phát triển chuyên sâu.</p></div></div>
+                        <div class="distinguished-award animate-on-scroll fade-in-up" data-stagger="3">
+                            <img src="./assets/images/voted.png" alt="Award Medal" class="medal-img">
+                            <div class="award-text">
+                                <h4>Giải Gian Hàng Yêu Thích</h4>
+                                <p>Tiền mặt: <strong>5.000.000 VNĐ</strong> & voucher Xanh SM trị giá 1.000.000 VNĐ.</p>
+                            </div>
+                        </div>
+                        <div class="distinguished-award animate-on-scroll fade-in-up" data-stagger="4">
+                            <img src="./assets/images/voted.png" alt="Award Medal" class="medal-img">
+                            <div class="award-text">
+                                <h4>Cơ Hội Phát Triển</h4>
+                                <p>Các dự án xuất sắc có cơ hội được VinIF và VinTechTalent xem xét đầu tư, phát triển chuyên sâu.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
-        
+
         <!-- MENTORS & JUDGES SECTION -->
         <section id="mentors" class="content-section">
             <div class="container">
                 <div class="content-card animate-on-scroll fade-in-up">
                     <h2 class="animated-headline">Ban Cố Vấn & Giám Khảo</h2>
                     <div class="swiper-container">
-                        <div class="swiper"><div class="swiper-wrapper"><!-- JS Populated --></div></div>
+                        <div class="swiper"><div class="swiper-wrapper"></div></div>
                         <div class="swiper-pagination"></div>
                         <div class="swiper-button-prev"></div>
                         <div class="swiper-button-next"></div>
@@ -143,15 +197,15 @@
             </div>
         </section>
 
-        <!-- DEMO DAY SECTION (NEW) -->
+        <!-- DEMO DAY SECTION -->
         <section id="demo-day" class="content-section">
             <div class="container">
                 <div class="content-card animate-on-scroll fade-in-up">
                     <div class="demo-day-content">
                         <div class="demo-day-text">
                             <h2 class="animated-headline">TechXpo Demo Day</h2>
-                            <p>Ngày Chung kết (20/09) không chỉ là cuộc tranh tài mà còn là một ngày hội công nghệ thực sự. Top 10 đội xuất sắc nhất sẽ có một gian hàng riêng để trưng bày, demo sản phẩm và tương tác trực tiếp với ban giám khảo, nhà đầu tư, nhà tuyển dụng và cộng đồng yêu công nghệ.</p>
-                            <p>Khán giả sẽ trực tiếp trải nghiệm và bình chọn cho các dự án. Dựa trên điểm từ BGK và bình chọn của khán giả, Top 5 sẽ được chọn để tiến vào vòng thuyết trình cuối cùng trên sân khấu chính, tranh tài cho ngôi vị cao nhất.</p>
+                            <p>Ngày Chung kết (20/09) là một ngày hội công nghệ thực sự. Top 10 đội xuất sắc nhất sẽ có gian hàng riêng để trưng bày, demo sản phẩm và tương tác trực tiếp với ban giám khảo, nhà đầu tư, và cộng đồng yêu công nghệ.</p>
+                            <p>Khán giả sẽ trực tiếp trải nghiệm và bình chọn. Dựa trên điểm từ BGK và bình chọn của khán giả, Top 5 sẽ tiến vào vòng thuyết trình cuối cùng trên sân khấu chính để tranh tài cho ngôi vị cao nhất.</p>
                         </div>
                         <div class="demo-day-image">
                             <img src="./assets/images/techday.jpg" alt="TechXpo Demo Day Event">
@@ -161,12 +215,12 @@
             </div>
         </section>
 
-        <!-- PARTNERS SECTION (RESTYLED & ENHANCED) -->
+        <!-- PARTNERS SECTION -->
         <section id="partners-sponsors" class="content-section">
             <div class="container">
                 <div class="partners-wrapper animate-on-scroll fade-in-up">
                     <div class="organizer-section"><h2 class="partner-title">Đơn vị tổ chức</h2><div class="partner-logos"><div class="partner-item"><img src="./assets/images/sponsors/logo2.png" alt="VinTechTalent Logo"><p>VinTechTalent Club</p></div></div></div>
-                    <div class="sponsor-section"><h2 class="partner-title">Nhà tài trợ & Đối tác đồng hành</h2><div class="partner-logos">
+                    <div class="sponsor-section"><h2 class="partner-title">Đối tác đồng hành</h2><div class="partner-logos">
                         <div class="partner-item"><img src="./assets/images/sponsors/logo2.png" alt="VinUni Logo"><p>VinUniversity</p></div>
                         <div class="partner-item"><img src="./assets/images/sponsors/logo2.png" alt="Vinschool Logo"><p>Vinschool</p></div>
                         <div class="partner-item"><img src="./assets/images/sponsors/logo2.png" alt="VinIF Logo"><p>VinIF</p></div>
@@ -176,12 +230,11 @@
             </div>
         </section>
 
-        <!-- FAQ SECTION (NEW) -->
+        <!-- FAQ SECTION -->
         <section id="faq" class="content-section">
             <div class="container">
                 <h2 class="animated-headline">Câu Hỏi Thường Gặp</h2>
                 <div class="faq-container animate-on-scroll fade-in-up">
-                    <!-- JS Populated -->
                 </div>
             </div>
         </section>
@@ -201,7 +254,6 @@
         </div>
     </footer>
     
-    <!-- SCRIPTS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script src="./assets/js/script.js"></script>
