@@ -27,7 +27,20 @@ h1, h2, h3, h4, .prize-amount, .prize-extra, .award-text p {
 /* --- BASE & UTILITIES --- */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-body { font-family: 'Be Vietnam Pro', sans-serif; background-color: var(--bg-dark); color: var(--text-light); -webkit-font-smoothing: antialiased; overflow-x: hidden; cursor: none; }
+body { font-family: 'Be Vietnam Pro', sans-serif; background-color: var(--bg-dark); color: var(--text-light); -webkit-font-smoothing: antialiased; overflow-x: hidden; cursor: none; /* Cho phép ngắt dòng đối với những từ quá dài không thể vừa một dòng */
+    overflow-wrap: break-word;
+    word-wrap: break-word; /* Dành cho trình duyệt cũ */
+
+    /* Quan trọng: Reset lại word-break về mặc định để tránh xung đột.
+       Trình duyệt sẽ tự động xử lý ngắt từ một cách tự nhiên. */
+    word-break: normal;
+
+    /* Tự động thêm gạch nối cho các từ bị ngắt một cách hợp lý (hỗ trợ Tiếng Việt tốt)
+       để tránh các khoảng trống lớn ở cuối dòng. */
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    -ms-hyphens: auto;
+    hyphens: auto;}
 body.no-scroll { overflow: hidden; }
 ::selection { background: var(--accent-start); color: var(--bg-dark); }
 a { color: inherit; text-decoration: none; }
@@ -330,3 +343,98 @@ h1.animated-headline { font-size: clamp(40px, 8vw, 80px); font-weight: 900; }
 }
 
 /* (The rest of your original CSS file remains unchanged) */
+
+/* ==========================================================================
+   ADVANCED TYPOGRAPHY & RESPONSIVE TEXT FIXES
+   Thêm vào cuối file style.css của bạn
+   ========================================================================== */
+
+/* --- 1. NỀN TẢNG XỬ LÝ VĂN BẢN TOÀN TRANG --- */
+/* Thiết lập cách ngắt dòng mặc định thông minh hơn cho toàn bộ trang */
+
+
+/* --- 2. THẨM MỸ THÔNG MINH CHO TIÊU ĐỀ VÀ ĐOẠN VĂN --- */
+/* Áp dụng cho tất cả các tiêu đề và đoạn văn chính */
+h1, h2, h3, h4, .section-intro, .prize-extra, .award-text p, .rules-list p, .demo-day-text p, .faq-answer p, .timeline-card p {
+    /* Công nghệ mới: Tự động cân bằng số lượng chữ trên các dòng của tiêu đề.
+       Đây là giải pháp TỐI THƯỢNG để tiêu đề trên mobile đẹp như desktop. */
+    text-wrap: balance;
+}
+
+/* Fallback cho các trình duyệt cũ hơn chưa hỗ trợ 'balance' */
+@supports not (text-wrap: balance) {
+    h1, h2, h3, h4, .section-intro, .prize-extra, .award-text p, .rules-list p, .demo-day-text p, .faq-answer p, .timeline-card p {
+       /* 'pretty' sẽ cố gắng không để lại một từ đơn độc ở dòng cuối (orphan word) */
+       text-wrap: pretty;
+    }
+}
+
+
+/* --- 3. CÁC VÙNG "BẤT KHẢ XÂM PHẠM" (KHÔNG BAO GIỜ XUỐNG DÒNG) --- */
+/* Áp dụng cho các nút CTA, nhãn, số tiền... những nơi không được phép ngắt dòng */
+.nav-cta-desktop span,
+.nav-cta-mobile span,
+.cta-button span,
+.prize-amount,
+.timeline-date,
+.countdown-item p {
+    white-space: nowrap;
+}
+
+/* Với các nút chủ đề, ta chỉ muốn tiêu đề của nó không bị ngắt */
+.theme-button h4 {
+    white-space: nowrap;
+}
+
+p, .rules-list li, .timeline-card p, .faq-answer p, #theme-details-text {
+    text-wrap: pretty; /* Tránh để một từ đơn độc ở dòng cuối */
+    overflow-wrap: break-word; /* Cho phép ngắt từ nếu một chuỗi quá dài (như URL) */
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    -ms-hyphens: auto;
+    hyphens: auto;
+}
+
+
+/* --- 3. GIẢI PHÁP TỐI THƯỢNG CHO TIÊU ĐỀ (HEADLINES) --- */
+/* Áp dụng cho TẤT CẢ các tiêu đề trên trang */
+h1, h2, h3, h4 {
+    /* BƯỚC 1: NGĂN CHẶN TUYỆT ĐỐI VIỆC NGẮT TỪ */
+    /* Buộc trình duyệt chỉ được xuống dòng ở khoảng trắng. */
+    word-break: keep-all;
+
+    /* Tắt hoàn toàn việc tự động thêm gạch nối cho tiêu đề. */
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+
+    /* BƯỚC 2: TỰ ĐỘNG CÂN BẰNG CÁC DÒNG (NẾU CÓ NHIỀU DÒNG) */
+    text-wrap: balance;
+}
+
+/* BƯỚC 3: TỰ ĐỘNG CO GIÃN FONT SIZE (FLUID TYPOGRAPHY) */
+/* Ghi đè lại các giá trị font-size cũ bằng các giá trị clamp() được tinh chỉnh. */
+
+/* Tiêu đề chính của Hero Section */
+h1.animated-headline {
+    /* Min: 35px, Preferred: co giãn theo 4.5vw, Max: 80px */
+    font-size: clamp(2.2rem, 1.5rem + 4.5vw, 5rem);
+}
+
+/* Tiêu đề của các Section */
+h2.animated-headline {
+    /* Min: 28px, Preferred: co giãn theo 3.5vw, Max: 48px */
+    font-size: clamp(1.75rem, 1.2rem + 3.5vw, 3rem);
+}
+
+/* Tiêu đề trong các card (Giải thưởng, Mentor, Timeline...) */
+.prize-card h4, .mentor-info h4, .timeline-card h4, .award-text h4, .faq-question {
+    /* Giảm kích thước một chút để an toàn hơn trong các container hẹp */
+    font-size: clamp(1rem, 0.8rem + 1.2vw, 1.25rem);
+}
+
+/* Tinh chỉnh riêng cho tiêu đề giải Nhất/Nhì/Ba */
+.prize-podium .prize-card h4 {
+     font-size: clamp(1.2rem, 0.9rem + 1.5vw, 1.5rem);
+}
